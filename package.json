@@ -1,0 +1,81 @@
+{
+    "name": "discord-typescript-bot",
+    "version": "0.0.0",
+    "description": "A starting point for a TypeScript Discord bot",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hopskipnfall/discord-typescript-bot"
+    },
+    "author": "Fred Dong",
+    "license": "MIT",
+    "scripts": {
+        "start": "npm run build-ts && node dist/src/server.js",
+        "build": "npm run build-ts && npm run lint",
+        "clean": "rm -rf node_modules",
+        "test": "npm run build && jest --forceExit --coverage --verbose --maxWorkers=4 --detectOpenHandles",
+        "test-silent": "npm run build && jest --forceExit --maxWorkers=4 --detectOpenHandles",
+        "lint": "eslint \"**/*.ts\"",
+        "lint-fix": "eslint \"**/*.ts\" --fix",
+        "format": "prettier --write .",
+        "build-ts": "tsc",
+        "watch-ts": "tsc -w",
+        "debug": "npm run build && npm run watch-debug",
+        "serve-debug": "nodemon --inspect dist/server.js",
+        "watch-debug": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run serve-debug\""
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run test-silent"
+        }
+    },
+    "dependencies": {
+        "discord.js": "13.0.x"
+    },
+    "devDependencies": {
+        "@types/jest": "26.0.x",
+        "@types/node": "16.x.x",
+        "@types/ws": "^7.2.6",
+        "@typescript-eslint/eslint-plugin": "^4.2.0",
+        "@typescript-eslint/parser": "^4.2.0",
+        "eslint": "^7.10.0",
+        "eslint-config-airbnb": "^18.2.0",
+        "eslint-config-airbnb-base": "^14.2.0",
+        "eslint-config-prettier": "^6.12.0",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-jsx-a11y": "^6.3.1",
+        "eslint-plugin-prettier": "^3.1.4",
+        "eslint-plugin-react": "^7.21.2",
+        "eslint-plugin-react-hooks": "^4.0.0",
+        "eslint-plugin-unicorn": "^22.0.0",
+        "husky": "^4.3.8",
+        "istanbul-api": "3.0.x",
+        "istanbul-reports": "3.0.x",
+        "jest": "27.x.x",
+        "prettier": "2.1.2",
+        "prettier-plugin-organize-imports": "^1.1.1",
+        "ts-jest": "27.x.x",
+        "ts-mockito": "2.6.x",
+        "ts-node": "9.0.x",
+        "tslint": "^6.1.x",
+        "typescript": "^4.3.5"
+    },
+    "jest": {
+        "globals": {
+            "ts-jest": {
+                "tsConfig": "tsconfig.json"
+            }
+        },
+        "moduleFileExtensions": [
+            "ts",
+            "js",
+            "json"
+        ],
+        "testMatch": [
+            "**/test/**/*.test.ts"
+        ],
+        "testEnvironment": "node",
+        "transform": {
+            "^.+\\.(ts|tsx)$": "ts-jest"
+        }
+    }
+}
