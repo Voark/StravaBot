@@ -1,14 +1,5 @@
-import { Message } from 'discord.js'
-import { mock } from 'ts-mockito'
 import { CommandHandler } from '../src/command_handler'
-
-const buildMockMessage = (content: string): Message => {
-    const message = mock(Message)
-    message.reply = jest.fn()
-    message.react = jest.fn()
-    message.content = content
-    return message
-}
+import { buildMockMessage } from './build_mock_message'
 
 describe('CommandHandler', () => {
     beforeEach(() => {
