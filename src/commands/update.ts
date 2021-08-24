@@ -1,15 +1,17 @@
+import { getLeaderboard } from '../api/get_leaderboard'
 import { CommandContext } from '../models/command_context'
 import { Command } from './command'
 
 export class UpdateLeaderboardCommand implements Command {
-    commandNames = ['greet', 'hello']
+    commandNames = ['update']
 
     getHelpMessage(commandPrefix: string): string {
-        return `Use ${commandPrefix}greet to get a greeting.`
+        return `Use ${commandPrefix}update to refresh the leaderboard.`
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
-        // Add command here
+        const print = getLeaderboard(parsedUserCommand)
+        await parsedUserCommand.originalMessage.reply(print)
     }
 
     hasPermissionToRun(parsedUserCommand: CommandContext): boolean {
