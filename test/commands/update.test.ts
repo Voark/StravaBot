@@ -1,7 +1,15 @@
 import { Message } from 'discord.js'
+import { getLeaderboard } from '../../src/api/get_leaderboard'
 import { UpdateLeaderboardCommand } from '../../src/commands/update'
 import { CommandContext } from '../../src/models/command_context'
 import { buildMockMessage } from '../build_mock_message'
+
+jest.mock('../../src/api/get_leaderboard')
+
+const mockgetLeaderboard = getLeaderboard as jest.MockedFunction<
+    typeof getLeaderboard
+>
+mockgetLeaderboard.mockReturnValue('testing 123')
 
 describe('UpdateLeaderboardCommand', () => {
     let command: UpdateLeaderboardCommand
@@ -28,6 +36,6 @@ describe('UpdateLeaderboardCommand', () => {
     it("should say 'testing 123'", async () => {
         command.run(commandContext)
         expect(message.reply).toHaveBeenCalledWith('testing 123')
-        expect(message.reply).toHaveBeenCalledTimes(1)
+        expect(mockgetLeaderboard).toHaveBeenCalledTimes(1)
     })
 })

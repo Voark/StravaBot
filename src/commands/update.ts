@@ -10,8 +10,9 @@ export class UpdateLeaderboardCommand implements Command {
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
-        const print = getLeaderboard(parsedUserCommand)
-        await parsedUserCommand.originalMessage.reply(print)
+        await parsedUserCommand.originalMessage.reply(
+            getLeaderboard(parsedUserCommand),
+        )
     }
 
     hasPermissionToRun(parsedUserCommand: CommandContext): boolean {
